@@ -50,14 +50,14 @@ public class ItemService {
         return dto;
     }
 
-    private Status convertStatusDto(StatusDto dto) {
+    protected Status convertStatusDto(StatusDto dto) {
 
         status = new Status();
         status = statusRepository.getById(dto.getId());
         return status;
     }
 
-    private Type convertTypeDto(TypeDto dto) {
+    protected Type convertTypeDto(TypeDto dto) {
 
         type = new Type();
         type = typeRepository.getById(dto.getId());
@@ -85,7 +85,7 @@ public class ItemService {
         return dtos;
     }
 
-    private ItemDto addItem(Item i) {
+    protected ItemDto addItem(Item i) {
         ItemDto dto = new ItemDto();
 
         dto.setQuantity(i.getQuantity());
@@ -99,7 +99,7 @@ public class ItemService {
         return dto;
     }
 
-    private ItemDto convertItem(Item i) {
+    protected ItemDto convertItem(Item i) {
         ItemDto dto = new ItemDto();
 
         dto.setQuantity(i.getQuantity());
@@ -112,7 +112,7 @@ public class ItemService {
         return dto;
     }
 
-    private Item convertItemDto(ItemDto i) {
+    protected Item convertItemDto(ItemDto i) {
         item = new Item();
 
         item.setQuantity(i.getQuantity());

@@ -15,6 +15,8 @@ public class RentDto {
 
     private DateTime dateHour;
 
+    private String message;
+
     public Long getId() {
         return id;
     }
@@ -61,5 +63,13 @@ public class RentDto {
 
     public void setDateHour(DateTime dateHour) {
         this.dateHour = dateHour;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

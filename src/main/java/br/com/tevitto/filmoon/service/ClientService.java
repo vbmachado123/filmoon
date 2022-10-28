@@ -38,7 +38,7 @@ public class ClientService {
             return null;
     }
 
-    private ClientDto convertClient(Client model) {
+    protected ClientDto convertClient(Client model) {
 
         ClientDto dto = new ClientDto();
 
@@ -66,5 +66,16 @@ public class ClientService {
         }
 
         return dtos;
+    }
+
+    public Client convertClientDto(ClientDto dto) {
+        client = new Client();
+
+        client.setEmail(dto.getEmail());
+        client.setName(dto.getName());
+        client.setPhone(dto.getPhone());
+        client.setId(dto.getId());
+        return client;
+
     }
 }
