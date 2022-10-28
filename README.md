@@ -1,6 +1,6 @@
 # Projeto Filmoon
 
-### Tempo Gasto no desenvolvimento: 3 Hora
+### Tempo Gasto no desenvolvimento: 3 Horas
 
 0 - Esquema do Banco de Dados
 ![plot](./filmoon_scheme.png)
