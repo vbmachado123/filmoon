@@ -1,6 +1,6 @@
 package br.com.tevitto.filmoon.data.dto;
 
-import org.joda.time.DateTime;
+import java.time.LocalDateTime;
 
 public class SaleDto {
     private Long id;
@@ -13,7 +13,7 @@ public class SaleDto {
 
     //private boolean returned;
 
-    private DateTime dateHour;
+    private LocalDateTime dateHour;
 
     public Long getId() {
         return id;
@@ -47,11 +47,11 @@ public class SaleDto {
         this.message = message;
     }
 
-    public DateTime getDateHour() {
+    public LocalDateTime getDateHour() {
         return dateHour;
     }
 
-    public void setDateHour(DateTime dateHour) {
+    public void setDateHour(LocalDateTime dateHour) {
         this.dateHour = dateHour;
     }
 }

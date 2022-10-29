@@ -4,6 +4,7 @@ import org.joda.time.DateTime;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 public class Rent implements Serializable {
@@ -23,7 +24,7 @@ public class Rent implements Serializable {
     private int days;
 
     @Column(length = 5000)
-    private DateTime dateHour;
+    private LocalDateTime dateHour;
 
     public Long getId() {
         return id;
@@ -65,11 +66,11 @@ public class Rent implements Serializable {
         this.days = days;
     }
 
-    public DateTime getDateHour() {
+    public LocalDateTime getDateHour() {
         return dateHour;
     }
 
-    public void setDateHour(DateTime dateHour) {
+    public void setDateHour(LocalDateTime dateHour) {
         this.dateHour = dateHour;
     }
 }

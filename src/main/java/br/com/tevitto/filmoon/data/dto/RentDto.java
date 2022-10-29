@@ -1,6 +1,7 @@
 package br.com.tevitto.filmoon.data.dto;
 
-import org.joda.time.DateTime;
+
+import java.time.LocalDateTime;
 
 public class RentDto {
     private Long id;
@@ -13,7 +14,7 @@ public class RentDto {
 
     private int days;
 
-    private DateTime dateHour;
+    private LocalDateTime dateHour;
 
     private String message;
 
@@ -57,11 +58,11 @@ public class RentDto {
         this.days = days;
     }
 
-    public DateTime getDateHour() {
+    public LocalDateTime getDateHour() {
         return dateHour;
     }
 
-    public void setDateHour(DateTime dateHour) {
+    public void setDateHour(LocalDateTime dateHour) {
         this.dateHour = dateHour;
     }
 

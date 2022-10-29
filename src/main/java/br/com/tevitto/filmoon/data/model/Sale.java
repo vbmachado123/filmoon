@@ -1,9 +1,9 @@
 package br.com.tevitto.filmoon.data.model;
 
 import org.joda.time.DateTime;
-
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 @Entity
 public class Sale implements Serializable {
@@ -19,7 +19,7 @@ public class Sale implements Serializable {
     private Client client;
 
     @Column(length = 5000)
-    private DateTime dateHour;
+    private LocalDateTime dateHour;
 
     public Long getId() {
         return id;
@@ -45,11 +45,11 @@ public class Sale implements Serializable {
         this.client = client;
     }
 
-    public DateTime getDateHour() {
+    public LocalDateTime getDateHour() {
         return dateHour;
     }
 
-    public void setDateHour(DateTime dateHour) {
+    public void setDateHour(LocalDateTime dateHour) {
         this.dateHour = dateHour;
     }
 }

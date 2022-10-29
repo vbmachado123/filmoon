@@ -1,6 +1,6 @@
 # Projeto Filmoon
 
-### Tempo Gasto no desenvolvimento: 6 Horas
+### Tempo gasto no desenvolvimento: 10 Horas
 
 Esquema do Banco de Dados
 ![plot](./filmoon_scheme.png)
@@ -17,12 +17,15 @@ mvn clean dependency:resolve
 mvn spring-boot:run
 ```
 
-A API está documentada com o Swagger. Ao acessar http://localhost:8080/swagger-ui/ será possível visualizar e testar os endpoint's
+A API está documentada com o Swagger. Ao acessar http://localhost:8080/swagger-ui/ será possível visualizar e testar os
+endpoint's
 
 <hr/>
 
 ### Informações Importantes
-- As tabelas auxiliares (Status e Type) já são criadas com valores, para que quando o usuário for inserir algum item, seja possível passar apenas o ID do campo requerido. Segue os índices:
+
+- As tabelas auxiliares (Status e Type) já são criadas com valores, para que quando o usuário for inserir algum item,
+  seja possível passar apenas o ID do campo requerido. Segue os índices:
 
 ## Tabela Status
 
@@ -40,4 +43,7 @@ A API está documentada com o Swagger. Ao acessar http://localhost:8080/swagger-
 | 1         | MOVIE |
 | 2         | BOOK |
 | 3         | TV_SHOW |
+
+Ao passar esses campos para criar um Item, pode ser passado apenas o ID do campo.
+
 

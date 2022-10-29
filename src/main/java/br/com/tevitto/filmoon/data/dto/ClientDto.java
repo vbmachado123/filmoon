@@ -9,6 +9,13 @@ public class ClientDto {
 
     private String email;
 
+    public ClientDto() {
+    }
+
+    public ClientDto(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

@@ -29,6 +29,8 @@ public class ClientController {
         return ok(service.create(dto));
     }
 
+    @ApiOperation(value = "Busca um Cliente por ID ou Nome")
+    @ApiResponse(code = 200, message = "Retorna o Cliente Encontrado", response = ClientDto.class)
     @GetMapping("/find_one")
     public ResponseEntity find_one(@RequestBody ClientDto dto) {
         ClientDto clientDto = service.find_one(dto);

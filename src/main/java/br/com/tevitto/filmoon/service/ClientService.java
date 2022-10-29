@@ -31,11 +31,27 @@ public class ClientService {
     }
 
     public ClientDto find_one(ClientDto dto) {
-        Optional<Client> optional = clientRepository.findById(dto.getId());
+        Optional<Client> optional = null;
 
-        if (optional.isPresent()) return convertClient(optional.get());
-        else
-            return null;
+        try {
+            if (dto.getId() >= 1) {
+                optional = clientRepository.findById(dto.getId());
+                if (optional.isPresent()) {
+
+                    return convertClient(optional.get());
+                } else {
+                    return null;
+                }
+            } else if (dto.getName() != null) {
+                optional = clientRepository.findByName(dto.getName());
+                return convertClient(optional.get());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return dto;
+        }
+
+        return null;
     }
 
     protected ClientDto convertClient(Client model) {

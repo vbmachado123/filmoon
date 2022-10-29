@@ -8,10 +8,10 @@ import br.com.tevitto.filmoon.data.types.StatusEnum;
 import br.com.tevitto.filmoon.repository.ClientRepository;
 import br.com.tevitto.filmoon.repository.ItemRepository;
 import br.com.tevitto.filmoon.repository.SaleRepository;
-import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +44,7 @@ public class SaleService {
             if (itemModel.getStatus().getStatus() == StatusEnum.SALE
                     || itemModel.getStatus().getStatus() == StatusEnum.ALL) { // Verifica se o item está disponivel para venda ou aluguel
                 sale.setClient(clientService.convertClientDto(dto.getClient()));
-                sale.setDateHour(DateTime.now());
+                sale.setDateHour(LocalDateTime.now());
 
                 itemModel.setQuantity(itemModel.getQuantity() - 1);
                 Item itemUpdated = itemRepository.save(itemModel);
@@ -53,7 +53,7 @@ public class SaleService {
                 Sale save = saleRepository.save(sale);
 
                 dto.setId(save.getId());
-
+                dto.setMessage("");
                 return dto;
             } else
                 dto.setMessage("O item não está disponivel para venda");
@@ -67,10 +67,7 @@ public class SaleService {
     public List<SaleDto> find_all() {
         List<SaleDto> dtos = new ArrayList<>();
         List<Sale> models = saleRepository.findAll();
-
-        // Order by Desc
-        Collections.sort(models, Collections.reverseOrder());
-
+        Collections.reverse(models);
         for (Sale s : models)
             dtos.add(convertSale(s));
 
@@ -93,10 +90,13 @@ public class SaleService {
                 if (optional.isPresent())
                     return convertSale(optional.get());
                 else return new SaleDto();
-            } else
-                return null;
+            } else {
+                dto.setMessage("Nenhum item encontrado!");
+                return dto;
+            }
         } catch (Exception e) {
-            return null;
+            dto.setMessage("Nenhum item encontrado!");
+            return dto;
         }
     }
 }

@@ -12,6 +12,7 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -44,7 +45,7 @@ public class RentService {
                 rent = new Rent();
 
                 rent.setDays(dto.getDays());
-                rent.setDateHour(new DateTime());
+                rent.setDateHour(LocalDateTime.now());
                 rent.setReturned(false); // Verifica se o item já foi devolvido ou não
 
                 itemModel.setQuantity(itemModel.getQuantity() - 1);
@@ -62,7 +63,7 @@ public class RentService {
                 dto.setMessage("O item precisará ser devolvido até: " + DateTime.parse(
                         String.valueOf(rent.getDateHour().plusDays(rent.getDays()))));
                 dto.setId(save.getId());
-
+                dto.setMessage("");
                 return dto;
             } else {
                 dto.setMessage("O item não está disponível para aluguel");
@@ -77,12 +78,16 @@ public class RentService {
 
     public RentDto find_one(RentDto dto) {
         Optional<Rent> optional = rentRepository.findById(dto.getId());
+        System.out.println("> Rent: " + optional.get().getDays());
         if (optional.isPresent()) {
             rent = optional.get();
             dto = convertRent(rent);
-            if (rent.getDateHour().plusDays(rent.getDays()).isEqual(DateTime.now()) && !rent.isReturned()
-                    || rent.getDateHour().plusDays(rent.getDays()).isAfter(DateTime.now()) && !rent.isReturned()) {
+            if (rent.getDateHour().plusDays(rent.getDays()).isEqual(LocalDateTime.now()) && !rent.isReturned()
+                    || rent.getDateHour().plusDays(rent.getDays()).isAfter(LocalDateTime.now()) && !rent.isReturned()) {
                 dto.setMessage("A devolução está atrasada!");
+
+                System.out.println("> Rent: " + rent.getDays());
+                return dto;
             } else
                 dto.setMessage("O Item já foi devolvido!");
         }
