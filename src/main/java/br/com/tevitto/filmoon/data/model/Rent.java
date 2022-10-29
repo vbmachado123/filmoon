@@ -22,6 +22,7 @@ public class Rent implements Serializable {
 
     private int days;
 
+    @Column(length = 5000)
     private DateTime dateHour;
 
     public Long getId() {

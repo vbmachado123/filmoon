@@ -1,27 +1,43 @@
 # Projeto Filmoon
 
-### Tempo Gasto no desenvolvimento: 3 Horas
+### Tempo Gasto no desenvolvimento: 6 Horas
 
-0 - Esquema do Banco de Dados
+Esquema do Banco de Dados
 ![plot](./filmoon_scheme.png)
 
 ## Como executar?
 
-1 - Com o projeto baixado, abra-o em uma IDE de sua preferência;
+- Altere as informações de acesso ao banco no arquivo `application.properties` (usuario e senha);
+- Execute o arquivo `src/main/resources/filmoon.sql` para a criação das tabelas e inserção de alguns dados para teste;
 
-2 - Abra o terminal integrado da IDE e digite o comando para o maven instalar as dependências: mvn clean dependency:
-resolve e aguarde finalizar;
+Instale as dependências com o mvn:
 
-3 - Abra o arquivo application.properties src/main/resources/application.properties e altere as linhas 4 e 5 com o seu
-usuário e senha do banco respectivamente;
+```bash
+mvn clean dependency:resolve
+mvn spring-boot:run
+```
 
-4 - Abra o CommandLine do Mysql ou algum programa que acesse o banco (HeidiSQL ou MySql Worckbench por exemplo) e crie
-um banco de dados intitulado *filmoon* - o banco não precisa ter nenhuma tabela, o Java criará elas automaticamente;
+A API está documentada com o Swagger. Ao acessar http://localhost:8080/swagger-ui/ será possível visualizar e testar os endpoint's
 
-5 - Feito isso, já é possível subir o servidor, pelo atalho de Run da IDE ou abrindo novamente o terminal integrado da
-IDE e digitando mvn clean spring-boot:run - esse comando sobe o server;
+<hr/>
 
-6 - Pronto, já da para testar os Endpoint's;
+### Informações Importantes
+- As tabelas auxiliares (Status e Type) já são criadas com valores, para que quando o usuário for inserir algum item, seja possível passar apenas o ID do campo requerido. Segue os índices:
 
-7 - Acessando localhost:8080/swagger-ui/ é possível visualizar mais detalhadamente a API, como por exemplo as Entidades
-do banco e os Controllers - e os endpoints de cada um
+## Tabela Status
+
+| Status_id | Descrição    |
+| ----------| ------------ |
+| 1         | NOT_AVAILABLE |
+| 2         | SALE |
+| 3         | RENT |
+| 4         | ALL |
+
+## Tabela Type
+
+| Type_id | Descrição    |
+| ----------| ------------ |
+| 1         | MOVIE |
+| 2         | BOOK |
+| 3         | TV_SHOW |
+

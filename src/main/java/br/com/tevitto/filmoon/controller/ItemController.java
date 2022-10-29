@@ -34,7 +34,7 @@ public class ItemController {
         return ok(service.findAll(type));
     }
 
-    @ApiOperation(value = "Busca um Item por ID ou Title")
+    @ApiOperation(value = "Busca um Item por ID, Type ou Title")
     @ApiResponse(code = 200, message = "Retorna um item", response = ItemDto.class)
     @GetMapping("/find_one")
     public ResponseEntity find_one(@RequestBody ItemDto dto) {

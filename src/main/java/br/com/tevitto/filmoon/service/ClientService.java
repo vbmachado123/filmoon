@@ -54,16 +54,8 @@ public class ClientService {
         List<ClientDto> dtos = new ArrayList<>();
         List<Client> models = clientRepository.findAll();
 
-        for (Client c : models) {
-            ClientDto dto = new ClientDto();
-
-            dto.setEmail(c.getEmail());
-            dto.setName(c.getName());
-            dto.setPhone(c.getPhone());
-            dto.setId(c.getId());
-
-            dtos.add(dto);
-        }
+        for (Client c : models)
+            dtos.add(convertClient(c));
 
         return dtos;
     }

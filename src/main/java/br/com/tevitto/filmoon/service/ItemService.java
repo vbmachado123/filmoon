@@ -34,17 +34,7 @@ public class ItemService {
 
     public ItemDto create(ItemDto dto) {
 
-        item = new Item();
-
-        item.setTitle(dto.getTitle());
-        item.setDescription(dto.getDescription());
-        item.setQuantity(dto.getQuantity());
-        item.setValue_rent(dto.getValue_rent());
-        item.setValue_sale(dto.getValue_sale());
-        item.setType(convertTypeDto(dto.getType()));
-        item.setStatus(convertStatusDto(dto.getStatus()));
-
-        Item saved = itemRepository.save(item);
+        Item saved = itemRepository.save(convertItemDto(dto));
         dto.setId(saved.getId());
 
         return dto;
@@ -71,21 +61,23 @@ public class ItemService {
         for (Item i : models) {
             ItemDto dto = new ItemDto();
 
-            if (type != 0) { // Filtrado por tipo
+            if (type != 0 && type > 0) { // Filtrado por tipo
                 if (type == i.getStatus().getId()) {
-                    dto.setStatus(convertStatus(i.getStatus()));
+                    //dto.setStatus(convertStatus(i.getStatus()));
                     dtos.add(convertItem(i));
                 }
-            } else {
+            } else
                 dtos.add(addItem(i));
-            }
-
         }
 
         return dtos;
     }
 
     protected ItemDto addItem(Item i) {
+        return convertItem(i);
+    }
+
+    protected ItemDto convertItem(Item i) {
         ItemDto dto = new ItemDto();
 
         dto.setQuantity(i.getQuantity());
@@ -99,20 +91,8 @@ public class ItemService {
         return dto;
     }
 
-    protected ItemDto convertItem(Item i) {
-        ItemDto dto = new ItemDto();
-
-        dto.setQuantity(i.getQuantity());
-        dto.setDescription(i.getDescription());
-        dto.setTitle(i.getTitle());
-        dto.setValue_rent(i.getValue_rent());
-        dto.setValue_sale(i.getValue_sale());
-        dto.setType(convertType(i.getType()));
-        dto.setId(i.getId());
-        return dto;
-    }
-
     protected Item convertItemDto(ItemDto i) {
+
         item = new Item();
 
         item.setQuantity(i.getQuantity());
@@ -121,6 +101,7 @@ public class ItemService {
         item.setValue_rent(i.getValue_rent());
         item.setValue_sale(i.getValue_sale());
         item.setType(convertTypeDto(i.getType()));
+        item.setStatus(convertStatusDto(i.getStatus()));
         item.setId(i.getId());
         return item;
     }
@@ -141,11 +122,21 @@ public class ItemService {
 
     public ItemDto find_one(ItemDto dto) {
 
-        Optional<Item> optional = itemRepository.findById(dto.getId());
-        if (optional.isPresent())
-            return convertItem(item);
-        else return new ItemDto();
+        try {
+            Optional<Item> optional = null;
+            if (dto.getId() != 0 && dto.getId() > 0) {
+                optional = itemRepository.findById(dto.getId());
+            } else if (dto.getTitle() != null)
+                optional = itemRepository.findByTitle(dto.getTitle());
+            else if (dto.getType() != null)
+                optional = itemRepository.findByType(convertTypeDto(dto.getType()));
 
+            if (optional.isPresent()) return convertItem(optional.get());
+            else return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public ItemDto update(ItemDto dto) {

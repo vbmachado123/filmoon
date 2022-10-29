@@ -9,7 +9,9 @@ public class SaleDto {
 
     private ClientDto client;
 
-    private boolean returned;
+    private String message;
+
+    //private boolean returned;
 
     private DateTime dateHour;
 
@@ -37,12 +39,12 @@ public class SaleDto {
         this.client = client;
     }
 
-    public boolean isReturned() {
-        return returned;
+    public String getMessage() {
+        return message;
     }
 
-    public void setReturned(boolean returned) {
-        this.returned = returned;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public DateTime getDateHour() {

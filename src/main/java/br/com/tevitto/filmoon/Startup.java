@@ -1,5 +1,6 @@
 package br.com.tevitto.filmoon;
 
+import org.joda.time.DateTime;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +19,7 @@ public class Startup {
 
     public static void main(String[] args) {
         SpringApplication.run(Startup.class, args);
-    }
 
+        System.out.println("> Iniciado: " + DateTime.now());
+    }
 }

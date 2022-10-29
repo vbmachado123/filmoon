@@ -18,6 +18,7 @@ public class Sale implements Serializable {
     @ManyToOne
     private Client client;
 
+    @Column(length = 5000)
     private DateTime dateHour;
 
     public Long getId() {
