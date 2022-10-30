@@ -36,6 +36,8 @@ endpoint's
 | 3         | RENT |
 | 4         | ALL |
 
+
+
 ## Tabela Type
 
 | Type_id | Descrição    |
